@@ -27,8 +27,8 @@
             <p class="card-text text-center" ><%= product.deskripsi %></p>
             
             <div class="d-flex justify-content-center gap-2">
-                <a href="/product/id" class="btn btn-primary">See Detail</a>
-            <a href="/cart" class="btn btn-danger">Add to Cart</a>
+                <a href="/products/<%=product.id%>/" class="btn btn-primary">See Detail</a>
+            <a href="/products/<%=product.id%>/addtocart" method ="POST" class="btn btn-danger">Add to Cart</a>
             </div>
     </div>
     </div>

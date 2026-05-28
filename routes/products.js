@@ -8,5 +8,6 @@ router.get('/:id', Controller.readProductById)
 // router.get('/products/:id/invoice', (req, res) => {
 //   res.send('Hello World!')
 // })
+router.post('/:id/addtocart', Controller.addToCart)
 
 module.exports = router

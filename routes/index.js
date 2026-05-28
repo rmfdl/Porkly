@@ -5,6 +5,7 @@ const loginRoute = require("./login")
 const logoutRoute = require("./logout")
 const profileRoute = require("./profile")
 const productsRoute = require("./products.js")
+const cartRoute = require("./cart.js")
 const Controller = require("../controllers/controller.js");
 
 
@@ -13,15 +14,19 @@ const Controller = require("../controllers/controller.js");
 router.get('/', Controller.home)
 
 router.use("/register", registerRoute)
-router.use("/login", loginRoute)
 router.use("/products", productsRoute)
+router.use("/cart", cartRoute)
+router.use("/login", loginRoute)
 
 //middleware session
+
+// const user =
 router.use((req, res, next) => {
   console.log(req.session)
   if(!req.session.userId){
     const error ="Please login first"
-    res.redirect(`/login?error=${error}`)
+    return res.redirect(`/login?error=${error}`)
+
   } else {
     next()
   }
@@ -31,10 +36,10 @@ router.use((req, res, next) => {
 
 router.use((req, res, next) => {
   console.log(req.session)
-  if(!req.session.userRole  === "User"){
+  if(req.session.userRole  !== "User"){
     const error ="You have no access"
     
-    res.redirect(`/login?error=${error}`)
+    return res.redirect(`/login?error=${error}`)
   } else {
     next()
   }

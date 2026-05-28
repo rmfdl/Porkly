@@ -7,7 +7,15 @@
     <p>Please login to your account here</p>
     
     </div>
+    <div class="d-flex justify-content-center mt-3">
     <!-- form -->
+      <% if(error) {%>
+        <% error=error.split(",") %>
+        <% error.forEach(el =>{ %>
+            <p style="color: red;"><%=el %></p>
+        <%  }) %>
+        <%  } %>
+        </div>
     <div class="d-flex justify-content-center mt-5">
         <form action="/login" method="post"
         class="w-25 text-left">

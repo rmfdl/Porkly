@@ -65,6 +65,17 @@ class Controller {
       console.log(error, "ERROR");
     }
   }
+    static async addToCart(req, res) {
+    try {
+      
+      
+      
+      // res.render("login", {isLogin: req.session.userId, error });
+    } catch (error) {
+      res.send(error);
+      console.log(error, "ERROR");
+    }
+  }
 
   static async addRegisterForm(req, res) {
     try {
@@ -83,6 +94,7 @@ class Controller {
        
       const { namaLengkap, email, nomorHp, password, role } = req.body;
       await User.findOne({
+        //buat ambil nama
         include: [Profile],
       });
       const user = await User.create({
@@ -112,7 +124,8 @@ class Controller {
 
   static async addLoginForm(req, res) {
     try {
-      res.render("login", {isLogin: req.session.userId, });
+       const { error } = req.query
+      res.render("login", {isLogin: req.session.userId, error });
     } catch (error) {
       res.send(error);
       console.log(error, "ERROR");
@@ -125,7 +138,7 @@ class Controller {
       let user = await User.findOne({
         where: { email },
       });
-
+//session middleware
       if (user) {
         console.log(password, user.password);
         const isValidPassword = bcrypt.compareSync
@@ -139,7 +152,8 @@ class Controller {
           return res.redirect("/");
         } else
         {
-          return res.redirect("/login");
+
+          return res.redirect("/login?error=email tidak terdaftar");
         }
       }
     } catch (error) {
@@ -155,6 +169,17 @@ class Controller {
     })
     
   }
+
+  //   static async cart(req, res) {
+  //   try {
+  //      await create.Order()
+  //   } catch (error) {
+  //     res.send(error);
+  //     console.log(error, "ERROR");
+  //   }
+  // }
+
+
 }
 
 module.exports = Controller;
