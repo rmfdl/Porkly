@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
-const fs = require('fs').promises
+const fs = require("fs").promises;
 module.exports = {
-  async up (queryInterface, Sequelize) {
+  async up(queryInterface, Sequelize) {
     let orders = await fs.readFile("./data/orders.json", "utf8");
     orders = JSON.parse(orders);
 
@@ -22,16 +22,16 @@ module.exports = {
      *   name: 'John Doe',
      *   isBetaMember: false
      * }], {});
-    */
+     */
   },
 
-  async down (queryInterface, Sequelize) {
-     await queryInterface.bulkDelete('Products', null, {});
+  async down(queryInterface, Sequelize) {
+    await queryInterface.bulkDelete("Products", null, {});
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-  }
+  },
 };
