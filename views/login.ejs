@@ -1,0 +1,30 @@
+<%-include("_header") %>
+
+<div class="mt-5">
+    <div class="text-center ">
+    <h2 >Welcome to Porkly</h2>
+    <p>Please login your account here</p>
+    </div>
+    <!-- form -->
+    <div class="d-flex justify-content-center mt-5">
+        <form action="/login" method="post"
+        class="w-25 text-left">
+
+            <!-- kolom email -->
+            <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input type="text" class="form-control" name="password">
+            </div>
+
+            <div  class="mb-3 d-flex justify-content-center gap-3">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
