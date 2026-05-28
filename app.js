@@ -3,6 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3000
 const routes = require("./routes/index")
+const session = require('express-session');
 
 
 app.set("view engine", "ejs");
@@ -11,7 +12,22 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('public'));
 
+
+
+
+app.use(
+  session({
+    secret: 'rahasia',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {secure:false, sameSite:true}  }))
+
+
+
+
 app.use("/", routes)
+
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
@@ -53,40 +69,6 @@ app.listen(port, () => {
 // })
 
 
-// app.get('/products/edit/:id', (req, res) => {
-//   res.send('Hello World!')
-// })
-// app.post('/products/edit/:id', (req, res) => {
-//   res.send('Hello World!')
-// })
-// app.post('/products/delete/:id', (req, res) => {
-//   res.send('Hello World!')
-// })
-// bagian orders
-
-// app.get('/orders', (req, res) => {
-//   res.send('Hello World!')
-// })
-// app.post('/orders', (req, res) => {
-//   res.send('Hello World!')
-// })
-// app.get('/orders/:id/invoice', (req, res) => {
-//   res.send('Hello World!')
-// })
-
-// profile
-
-// app.get('/profile', (req, res) => {
-//   res.send('Hello World!')
-// })
-// app.post('/profile', (req, res) => {
-//   res.send('Hello World!')
-// })
-// app.get('/admin/dashboard', (req, res) => {
-//   res.send('Hello World!')
-// })
-
-
 
 
 
@@ -122,45 +104,5 @@ Urutan migrasi (user, profile, product, order,productOrder)
 
 Urutan migrasi (user, profile, product, order,productOrder)
 
-Assosiation 
-//User
-User.hasOne(Profile)
-User.hasMany(Order)
-
-//Profile
-Profile.belongsTo(User)
-
-
-// Product
-
-Product.belongsToMany(Order, {
-  through: ProductOrder
-})
-
-// Order
-Order.belongsTo(User)
-Order.belongsToMany(Product, {
-  through: ProductOrder
-})
-
-// ProductOrder
-
-ProductOrder.belongsTo(Product)
-ProductOrder.belongsTo(Order)
-
-//reference di migration//
-
-await queryInterface.createTable('Profiles', {
-  // kolom kain
-  UserId: {
-    type: Sequelize.INTEGER,
-    references: {
-      model: 'Users',   // nama tabel, bukan model
-      key: 'id'
-    },
-    onDelete: 'CASCADE',
-    onUpdate: 'CASCADE'
-  }
-});
 
 */

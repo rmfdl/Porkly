@@ -14,7 +14,14 @@ module.exports = (sequelize, DataTypes) => {
   }
   Profile.init(
     {
-      namaLengkap: DataTypes.STRING,
+      namaLengkap: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Name required!" },
+          notEmpty: { msg: "Name Required!" },
+        },
+      },
       alamat: DataTypes.STRING,
       jenisKelamin: DataTypes.STRING,
       ttl: DataTypes.DATE,
