@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "tanggalOrder": "2026-05-20T09:00:00Z",
+    "totalHarga": 248000,
+    "status": "Selesai",
+    "UserId": 2
+  },
+  {
+    "id": 2,
+    "tanggalOrder": "2026-05-21T10:30:00Z",
+    "totalHarga": 160000,
+    "status": "Diproses",
+    "UserId": 3
+  }
+]

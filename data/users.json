@@ -1,0 +1,37 @@
+[
+  {
+    "id": 1,
+    "nomorHp": "081234567890",
+    "email": "admin@betamart.com",
+    "password": "hashed_password_admin",
+    "role": "Admin"
+  },
+  {
+    "id": 2,
+    "nomorHp": "082111222333",
+    "email": "budi.santoso@email.com",
+    "password": "hashed_password_budi",
+    "role": "Users"
+  },
+  {
+    "id": 3,
+    "nomorHp": "083333444555",
+    "email": "siti.rahayu@email.com",
+    "password": "hashed_password_siti",
+    "role": "Users"
+  },
+  {
+    "id": 4,
+    "nomorHp": "085678901234",
+    "email": "andi.wijaya@email.com",
+    "password": "hashed_password_andi",
+    "role": "Users"
+  },
+  {
+    "id": 5,
+    "nomorHp": "087890123456",
+    "email": "dewi.kusuma@email.com",
+    "password": "hashed_password_dewi",
+    "role": "Users"
+  }
+]

@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "namaProduct": "Smoked Bacon Slice",
+    "kodeProduct": "BACON",
+    "jenis": "Bacon",
+    "harga": 85000,
+    "imageURL": "https://example.com/images/bacon.jpg",
+    "stock": 40,
+    "beratProduct": 500,
+    "deskripsi": "Smoked bacon slice dengan kualitas premium dan aroma asap khas yang gurih. Cocok digunakan untuk breakfast, burger, pasta, atau berbagai hidangan western lainnya.",
+    "expired": "2026-06-10"
+  },
+  {
+    "id": 2,
+    "namaProduct": "Premium Bacon Cut",
+    "kodeProduct": "BACON",
+    "jenis": "Bacon",
+    "harga": 95000,
+    "imageURL": "https://example.com/images/bacon-premium.jpg",
+    "stock": 35,
+    "beratProduct": 500,
+    "deskripsi": "Potongan bacon premium dengan perpaduan daging dan lemak yang seimbang. Memiliki tekstur lembut dan rasa gurih yang cocok untuk dipanggang maupun digoreng.",
+    "expired": "2026-06-12"
+  },
+  {
+    "id": 3,
+    "namaProduct": "Classic Pork Salami",
+    "kodeProduct": "SALAMI",
+    "jenis": "Salami",
+    "harga": 78000,
+    "imageURL": "https://example.com/images/salami.jpg",
+    "stock": 25,
+    "beratProduct": 300,
+    "deskripsi": "Salami klasik dengan cita rasa khas dan tekstur padat yang nikmat. Cocok dijadikan topping pizza, sandwich, atau camilan siap santap.",
+    "expired": "2026-07-01"
+  },
+  {
+    "id": 4,
+    "namaProduct": "Spicy Pork Salami",
+    "kodeProduct": "SALAMI",
+    "jenis": "Salami",
+    "harga": 82000,
+    "imageURL": "https://example.com/images/salami-spicy.jpg",
+    "stock": 20,
+    "beratProduct": 300,
+    "deskripsi": "Salami daging babi dengan tambahan rempah pedas yang memberikan rasa lebih kuat dan lezat. Cocok untuk pecinta makanan bercita rasa spicy.",
+    "expired": "2026-07-03"
+  },
+  {
+    "id": 5,
+    "namaProduct": "Pork Belly Bone Small",
+    "kodeProduct": "BELLY-BONE",
+    "jenis": "Pork Belly Bone",
+    "harga": 65000,
+    "imageURL": "https://example.com/images/belly-bone-small.jpg",
+    "stock": 30,
+    "beratProduct": 500,
+    "deskripsi": "Pork belly bertulang ukuran kecil dengan lapisan lemak yang pas. Sangat cocok untuk sup, semur, atau masakan tradisional berbumbu.",
+    "expired": "2026-06-08"
+  },
+  {
+    "id": 6,
+    "namaProduct": "Pork Belly Bone Large",
+    "kodeProduct": "BELLY-BONE",
+    "jenis": "Pork Belly Bone",
+    "harga": 88000,
+    "imageURL": "https://example.com/images/belly-bone-large.jpg",
+    "stock": 18,
+    "beratProduct": 1000,
+    "deskripsi": "Pork belly bertulang ukuran besar dengan potongan tebal dan daging yang juicy. Ideal untuk dipanggang, dibakar, atau dimasak perlahan.",
+    "expired": "2026-06-09"
+  }
+]

@@ -1,0 +1,12 @@
+const express = require('express');
+const router = express.Router();
+const Controller = require("../controllers/controller.js");
+
+router.get('/profile', (req, res) => {
+  res.send('Hello World!')
+})
+router.post('/profile', (req, res) => {
+  res.send('Hello World!')
+})
+
+module.exports = router
