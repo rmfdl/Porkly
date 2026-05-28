@@ -1,7 +1,5 @@
-function currencyFormat(currency){
-   return `Rp ${currency.toLocaleString('id-ID')}`;
-    
-    
+function currencyFormat(currency) {
+  return `Rp ${currency.toLocaleString("id-ID")}`;
 }
 
-module.exports = currencyFormat
+module.exports = currencyFormat;

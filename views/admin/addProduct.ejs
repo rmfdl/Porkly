@@ -1,0 +1,50 @@
+<%- include('./adminHeader.ejs') %>
+
+<div class="position-relative d-flex align-items-center justify-content-center text-center" style="min-height:92vh; overflow:hidden;">
+  <form>
+    <div class="mb-3">
+      <label for="" class="form-label">Product</label>
+      <input type="text" name="product" class="form-control" id="" aria-describedby="">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Type</label>
+      <select name="type" id="" class="form-select">
+        <% types.forEach(type => { %>
+        <option value="type"><%= type %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Price</label>
+      <input type="number" name="price" class="form-control" id="" aria-describedby="">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">ImageURL</label>
+      <input type="text" name="imageURL" class="form-control" id="" aria-describedby="">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Stock</label>
+      <input type="number" name="stock" class="form-control" id="" aria-describedby="">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Weight</label>
+      <input type="number" name="weight" class="form-control" id="" aria-describedby="">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Description</label>
+      <input type="text" name="description" class="form-control" id="" aria-describedby="">
+    </div>
+    <div class="mb-3">
+      <label for="" class="form-label">Expired Date</label>
+      <input type="date" name="expDate" class="form-control" id="" aria-describedby="">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+
+  </html>
+
+</div>

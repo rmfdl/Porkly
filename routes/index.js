@@ -1,38 +1,24 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const registerRoute = require("./register")
-const loginRoute = require("./login")
-const logoutRoute = require("./logout")
-const profileRoute = require("./profile")
-const productsRoute = require("./products.js")
+const registerRoute = require("./register");
+const loginRoute = require("./login");
+const logoutRoute = require("./logout");
+const profileRoute = require("./profile");
+const productsRoute = require("./products.js");
+const adminRoute = require("./admin.js");
 const Controller = require("../controllers/controller.js");
 
-
-router.use("/register", registerRoute)
-router.use("/login", loginRoute)
-router.use("/logout", logoutRoute)
-router.use("/profile", profileRoute)
-router.use("/products", productsRoute)
-
-
+router.use("/register", registerRoute);
+router.use("/login", loginRoute);
+router.use("/logout", logoutRoute);
+router.use("/profile", profileRoute);
+router.use("/products", productsRoute);
+router.use("/admin", adminRoute);
 
 // router.get('/', Controller.home)
-router.get('/', Controller.home)
+router.get("/", Controller.home);
 
-
-module.exports = router
-
-
-
-
-
-
-
-
-
-
-
-
+module.exports = router;
 
 // profile
 // app.get('/profile', (req, res) => {
