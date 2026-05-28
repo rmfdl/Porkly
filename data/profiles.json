@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "namaLengkap": "Super Admin Betamart",
+    "alamat": "Jl. Sudirman No. 1, Jakarta Pusat",
+    "jenisKelamin": "Laki-laki",
+    "ttl": "1990-01-15",
+    "UserId": 1
+  },
+  {
+    "id": 2,
+    "namaLengkap": "Budi Santoso",
+    "alamat": "Jl. Mangga Dua No. 45, Jakarta Utara",
+    "jenisKelamin": "Laki-laki",
+    "ttl": "1992-05-22",
+    "UserId": 2
+  },
+  {
+    "id": 3,
+    "namaLengkap": "Siti Rahayu",
+    "alamat": "Jl. Kebon Jeruk No. 12, Jakarta Barat",
+    "jenisKelamin": "Perempuan",
+    "ttl": "1995-08-10",
+    "UserId": 3
+  },
+  {
+    "id": 4,
+    "namaLengkap": "Andi Wijaya",
+    "alamat": "Jl. Fatmawati No. 88, Jakarta Selatan",
+    "jenisKelamin": "Laki-laki",
+    "ttl": "1988-11-30",
+    "UserId": 4
+  },
+  {
+    "id": 5,
+    "namaLengkap": "Dewi Kusuma",
+    "alamat": "Jl. Kemang Raya No. 5, Jakarta Selatan",
+    "jenisKelamin": "Perempuan",
+    "ttl": "1997-03-18",
+    "UserId": 5
+  }
+]
