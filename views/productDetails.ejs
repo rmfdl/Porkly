@@ -1,0 +1,47 @@
+<%- include('_header') %>
+<div
+  style="display:flex; gap:50px;margin:50px 120px;align-items:flex-start;">
+
+  <!-- gambar -->
+  <div style="width:50%;">
+    <img
+      src="<%= product.imageURL %>"
+      style="width:100%; height:350px;object-fit:cover; border-radius:10px;">
+  </div>
+
+  <!-- detail -->
+  <div style="width:50%;">
+
+    <h1>
+      <%= product.namaProduct %>
+    </h1>
+
+    <p style="color:#dc3545;">
+      <%= currencyFormat(product.harga) %>
+    </p>
+
+    
+    <p style="margin-top:20px;">
+     Berat product: <%= product.beratProduct %> gram
+    </p>
+
+    <p style="margin-top:20px;">
+      <%= product.deskripsi %>
+    </p>
+
+    <p>
+      Stock :
+      <%= product.stock %>
+    </p>
+
+   <a href="/cart" class="btn btn-danger">Add to Cart</a>
+            </div>
+
+  </div>
+
+</div>
+
+
+
+
+<%- include('_footer') %>

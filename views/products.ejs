@@ -1,0 +1,44 @@
+<%- include('_header') %>
+
+
+<div>
+    <div style="margin-left: 230px; margin-right: 200px; margin-top: 40px;">
+        <form class="d-flex me-3" action="/products" method="GET">
+        <input type="search" name="search" placeholder="Cari produk..."
+          value=""
+          class="form-control me-1" style="width:400px;">
+        <button type="submit" class="btn btn-danger">Search</button>
+      </form>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); margin-left: 200px; margin-right: 200px; margin-top: 40px;  gap: 20px;">
+        <% products.forEach(product => { %>
+        <div class="card" style="width: 100%; margin: 20px 20px;" >
+            <img src="<%= product.imageURL %>" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;"
+            >
+            <div class="card-body">
+
+            <h5 a class="card-title text-center"><%= product.namaProduct %></h5>
+            <p style="font-weight: bold; color: #dc3545;text-align: center;">
+                <%= currencyFormat(product.harga) %>
+            </p>
+
+
+            <p class="card-text text-center" ><%= product.deskripsi %></p>
+            
+            <div class="d-flex justify-content-center gap-2">
+                <a href="/products/<%=product.id%>/" class="btn btn-primary">See Detail</a>
+            <a href="/products/<%=product.id%>/addtocart" method ="POST" class="btn btn-danger">Add to Cart</a>
+            </div>
+    </div>
+    </div>
+            <% }) %>
+    </div>
+
+
+</div>
+
+
+
+
+<%- include('_footer') %>
