@@ -1,12 +1,9 @@
 <%- include('_header') %>
-<div
-  style="display:flex; gap:50px;margin:50px 120px;align-items:flex-start;">
+<div style="display:flex; gap:50px;margin:50px 120px;align-items:flex-start;">
 
   <!-- gambar -->
   <div style="width:50%;">
-    <img
-      src="<%= product.imageURL %>"
-      style="width:100%; height:350px;object-fit:cover; border-radius:10px;">
+    <img src="<%= product.imageURL %>" style="width:100%; height:350px;object-fit:cover; border-radius:10px;">
   </div>
 
   <!-- detail -->
@@ -20,9 +17,9 @@
       <%= currencyFormat(product.harga) %>
     </p>
 
-    
+
     <p style="margin-top:20px;">
-     Berat product: <%= product.beratProduct %> gram
+      Berat product: <%= product.beratProduct %> gram
     </p>
 
     <p style="margin-top:20px;">
@@ -34,10 +31,13 @@
       <%= product.stock %>
     </p>
 
-   <a href="/cart" class="btn btn-danger">Add to Cart</a>
-            </div>
 
+    <form action="/products/<%=product.id%>/addtocart" method="POST" class="d-inline">
+      <button type="submit" class="btn btn-danger">Add to Cart</button>
+    </form>
   </div>
+
+</div>
 
 </div>
 

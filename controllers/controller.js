@@ -8,6 +8,7 @@ const {
 const { Op, where } = require("sequelize");
 const currencyFormat = require("../helpers/currencyFormat");
 const bcrypt = require("bcryptjs");
+const easyinvoice = require("easyinvoice");
 
 //bagian home nanti tampilin 4 cotnoh product, lalu bikin link seem more products.
 
@@ -173,11 +174,16 @@ class Controller {
           req.session.userId = user.id;
           req.session.userRole = user.role;
           // req.session= {id: user.id,role:user.role }
-
-          return res.redirect("/");
+          if (req.session.userRole === "User") {
+            return res.redirect("/");
+          } else if (req.session.userRole === "Admin") {
+            return res.redirect("/admin");
+          }
         } else {
-          return res.redirect("/login?error=email tidak terdaftar");
+          return res.redirect("/login?error=Email atau password salah");
         }
+      } else {
+        return res.redirect("/login?error=email tidak terdaftar");
       }
     } catch (error) {
       res.send(error);
