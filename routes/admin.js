@@ -3,13 +3,12 @@ const router = express.Router();
 const AdminController = require("../controllers/adminController");
 
 //  login
-const admin = function (req, res, next) {
-  console.log("object");
-  next();
-};
-router.get("/", admin, AdminController.home);
-router.get("/productManagement", admin, AdminController.productManagement);
-router.get("/addProduct", admin, AdminController.addProduct);
-router.post("/addProduct", admin, AdminController.postAddProduct);
 
+router.get("/", AdminController.home);
+router.get("/productManagement", AdminController.productManagement);
+router.get("/addProduct", AdminController.addProduct);
+router.post("/addProduct", AdminController.postAddProduct);
+router.get("/editProduct/:id", AdminController.editProduct);
+router.post("/editProduct/:id", AdminController.posteditProduct);
+router.get("/deleteProduct/:id", AdminController.deleteProduct);
 module.exports = router;

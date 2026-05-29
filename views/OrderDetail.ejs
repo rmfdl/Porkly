@@ -1,0 +1,86 @@
+<%- include('_header') %>
+
+<div style="margin-left: 200px; margin-right: 200px; margin-top: 40px; margin-bottom: 80px;">
+
+  <div class="mb-3">
+    <a href="/cart/order" class="text-decoration-none text-muted small">← Kembali ke Riwayat Pesanan</a>
+  </div>
+
+  <div class="card shadow-sm border-0" style="border-radius: 8px; overflow: hidden;">
+
+    <div class="card-header bg-dark text-white p-4">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h4 class="mb-1" style="font-weight: bold;">Detail Pesanan #ORD-<%= order.id %></h4>
+          <p class="mb-0 text-white-50 small">
+            Dibuat pada: <%= new Date(order.updatedAt).toLocaleString('id-ID', { day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit' }).replace(' pukul ', ', ').replace('.', ':') %> WIB
+          </p>
+        </div>
+        <div class="col-md-6 text-md-end mt-3 mt-md-0 d-flex justify-content-md-end align-items-center gap-2">
+          <a href="/cart/order/<%= order.id %>/invoice" class="btn btn-light btn-sm fw-500 text-danger">
+            <i class="ti ti-file-text"></i> Unduh Invoice
+          </a>
+          <span class="badge bg-success py-2 px-3 fs-6 m-0">✓ <%= order.status %></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-body p-4">
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead class="table-light">
+            <tr>
+              <th scope="col" style="width: 50%;">Produk</th>
+              <th scope="col" class="text-center" style="width: 15%;">Harga Satuan</th>
+              <th scope="col" class="text-center" style="width: 15%;">Jumlah</th>
+              <th scope="col" class="text-end" style="width: 20%;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% order.ProductOrders.forEach(item => { %>
+            <tr>
+              <td>
+                <div class="d-flex align-items-center gap-3">
+                  <img src="<%= item.Product.imageURL %>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 4px;">
+                  <div>
+                    <h6 class="mb-0" style="font-weight: 600;"><%= item.Product.namaProduct %></h6>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <%= currencyFormat(item.price) %>
+              </td>
+              <td class="text-center">
+                <%= item.quantity %> pcs
+              </td>
+              <td class="text-end fw-bold" style="color: #495057;">
+                <%= currencyFormat(item.subtotal) %>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row justify-content-end mt-4">
+        <div class="col-md-5">
+          <div class="d-flex justify-content-between align-items-center p-3 mb-3" style="background-color: #f8f9fa; border-radius: 6px;">
+            <span class="fw-bold text-muted">Total Pembayaran</span>
+            <h4 class="mb-0 fw-bold text-danger">
+              <%= currencyFormat(order.totalHarga) %>
+            </h4>
+          </div>
+
+          <div class="text-end">
+            <a href="/cart/order/<%= order.id %>/invoice" class="btn btn-outline-danger w-100 py-2 fw-500">
+              <i class="ti ti-download"></i> Cetak Invoice PDF
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%- include('_footer') %>

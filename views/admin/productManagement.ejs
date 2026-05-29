@@ -1,47 +1,93 @@
 <%- include('./adminHeader.ejs') %>
 
-<a class="btn btn-secondary" href="/admin/addProduct" role="button">Add</a>
+<div class="container-fluid px-4 py-4" style="min-height: 85vh;">
 
-<div class="position-relative d-flex align-items-center justify-content-center text-center" style="min-height:92vh; overflow:hidden;">
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">No</th>
-        <th scope="col">Product</th>
-        <th scope="col">Code</th>
-        <th scope="col">Type</th>
-        <th scope="col">Price</th>
-        <th scope="col">Image</th>
-        <th scope="col">Stock</th>
-        <th scope="col">Weight</th>
-        <th scope="col">Description</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% products.forEach((product, index) => { %>
-      <tr>
-        <th scope="row"><%= index+1 %></th>
-        <td><%= product.namaProduct %></td>
-        <td><%= product.kodeProduct %></td>
-        <td><%= product.jenis %></td>
-        <td><%= product.harga %></td>
-        <td><%= product.imageURL %></td>
-        <td><%= product.stock %></td>
-        <td><%= product.beratProduct %></td>
-        <td><%= product.deskripsi %></td>
-        <td><a class="btn btn-primary" href="#" role="button">Edit</a>
-          <a class="btn btn-danger" href="#" role="button">Delete</a>
-        </td>
-      </tr>
-      <% }) %>
-    </tbody>
-  </table>
-  </footer>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="mb-1" style="font-weight: 700;">Manajemen Produk</h2>
+      <p class="text-muted mb-0">Kelola katalog, stok, dan harga produk Porkly kamu di sini.</p>
+    </div>
+    <a class="btn btn-danger px-4 py-2" href="/admin/addProduct" role="button" style="font-weight: 500;">
+      <i class="ti ti-plus"></i> Tambah Produk Baru
+    </a>
+  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+  <div class="card shadow-sm border-0" style="border-radius: 10px; overflow: hidden;">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0" style="background-color: #fff;">
+        <thead class="table-light border-bottom text-secondary">
+          <tr>
+            <th scope="col" class="py-3 px-4" style="width: 5%;">No</th>
+            <th scope="col" class="py-3" style="width: 10%;">Gambar</th>
+            <th scope="col" class="py-3" style="width: 20%;">Nama Produk</th>
+            <th scope="col" class="py-3" style="width: 10%;">Kode</th>
+            <th scope="col" class="py-3" style="width: 10%;">Kategori / Tipe</th>
+            <th scope="col" class="py-3 text-end" style="width: 12%;">Harga</th>
+            <th scope="col" class="py-3 text-center" style="width: 8%;">Stok</th>
+            <th scope="col" class="py-3 text-center" style="width: 10%;">Berat</th>
+            <th scope="col" class="py-3" style="width: 15%;">Deskripsi</th>
+            <th scope="col" class="py-3 text-center" style="width: 10%;">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach((product, index) => { %>
+          <tr>
+            <td class="px-4 fw-medium text-muted"><%= index + 1 %></td>
 
-  </html>
+            <td>
+              <img src="<%= product.imageURL %>" alt="" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;" class="border">
+            </td>
+
+            <td class="fw-bold text-dark"><%= product.namaProduct %></td>
+
+            <td><code class="text-danger fw-semibold"><%= product.kodeProduct %></code></td>
+
+            <td>
+              <span class="badge bg-light text-dark border px-2 py-1.5"><%= product.jenis %></span>
+            </td>
+
+            <td class="text-end fw-bold text-dark">
+              <%= currencyFormat(product.harga) %>
+            </td>
+
+            <td class="text-center">
+              <% if (product.stock <= 5) { %>
+              <span class="badge bg-danger-subtle text-danger border border-danger-subtle px-2 py-1.5 w-100">
+                <%= product.stock %> (Kritis)
+              </span>
+              <% } else { %>
+              <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1.5 w-100">
+                <%= product.stock %> Pcs
+              </span>
+              <% } %>
+            </td>
+
+            <td class="text-center text-muted"><%= product.beratProduct %> gr</td>
+
+            <td class="text-muted small">
+              <%= product.deskripsi.length > 50 ? product.deskripsi.substring(0, 50) + '...' : product.deskripsi %>
+            </td>
+
+            <td class="text-center">
+              <div class="d-inline-flex gap-1">
+                <a class="btn btn-sm btn-outline-primary px-2.5 py-1" href="/admin/editProduct/<%= product.id %>" role="button" title="Edit">
+                  Edit
+                </a>
+                <a class="btn btn-sm btn-outline-danger px-2.5 py-1" href="/admin/deleteProduct/<%= product.id %>" role="button" title="Hapus" onclick="return confirm('Apakah Anda yakin ingin menghapus produk ini?')">
+                  Hapus
+                </a>
+              </div>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -79,12 +79,8 @@ class Controller {
         where: { id: req.session.userId },
       });
       let [order, created] = await Order.findOrCreate({
-        where: { UserId: user.id },
+        where: { UserId: user.id, status: "Diproses" },
       });
-
-      if (!order) {
-        order = await Order.create({ UserId: user.id });
-      }
       const checkProductExist = await ProductOrder.findOne({
         where: {
           ProductId: id,
@@ -195,14 +191,139 @@ class Controller {
     });
   }
 
-  //   static async cart(req, res) {
-  //   try {
-  //      await create.Order()
-  //   } catch (error) {
-  //     res.send(error);
-  //     console.log(error, "ERROR");
-  //   }
-  // }
+  static async cart(req, res) {
+    try {
+      const order = await Order.findOne({
+        where: { UserId: req.session.userId, status: "Diproses" },
+      });
+      if (!order) {
+        return res.render("cart", {
+          isLogin: req.session.userId,
+          order: null,
+          productOrder: [],
+        });
+      }
+
+      const productOrder = await ProductOrder.findAll({
+        where: { OrderId: order.id },
+        include: ["Product"],
+      });
+      res.render("cart", {
+        isLogin: req.session.userId,
+        order,
+        productOrder,
+        currencyFormat,
+      });
+    } catch (error) {
+      res.send(error);
+      console.log(error, "ERROR");
+    }
+  }
+
+  static async checkout(req, res) {
+    try {
+      const order = await Order.findOne({
+        where: {
+          UserId: req.session.userId,
+          status: "Diproses",
+        },
+      });
+
+      if (!order) {
+        return res
+          .status(400)
+          .send("Tidak ada keranjang aktif yang bisa dicheckout.");
+      }
+      const productOrders = await ProductOrder.findAll({
+        where: { OrderId: order.id },
+        include: ["Product"],
+      });
+
+      if (productOrders.length === 0) {
+        return res.status(400).send("Keranjang belanja kamu masih kosong.");
+      }
+
+      for (const item of productOrders) {
+        const product = item.Product;
+
+        // Cek apakah stok cukup
+        if (product.stok < item.quantity) {
+          return res
+            .status(400)
+            .send(
+              `Stok produk "${product.namaProduct}" tidak mencukupi. Sisa stok: ${product.stok}`,
+            );
+        }
+
+        // Kurangi stok produk
+        await product.update({
+          stock: product.stock - item.quantity,
+        });
+      }
+
+      await order.update({
+        status: "Selesai",
+      });
+
+      res.redirect("/products?checkout=success");
+    } catch (error) {
+      res.send(error);
+      console.log(error, "ERROR");
+    }
+  }
+  static async orderHistory(req, res) {
+    try {
+      const orders = await Order.findAll({
+        where: {
+          UserId: req.session.userId,
+          status: "Selesai",
+        },
+        include: {
+          model: ProductOrder,
+          include: ["Product"],
+        },
+        order: [["updatedAt", "DESC"]],
+      });
+
+      res.render("OrderHistory", {
+        isLogin: req.session.userId,
+        orders,
+        currencyFormat,
+      });
+    } catch (error) {
+      res.send(error);
+      console.log(error, "ERROR");
+    }
+  }
+  static async orderDetail(req, res) {
+    try {
+      const { id } = req.params;
+
+      const order = await Order.findOne({
+        where: {
+          id: id,
+          UserId: req.session.userId,
+        },
+        include: {
+          model: ProductOrder,
+          include: ["Product"],
+        },
+      });
+
+      if (!order) {
+        return res.status(404).send("Pesanan tidak ditemukan.");
+      }
+
+      res.render("OrderDetail", {
+        isLogin: req.session.userId,
+        order,
+        currencyFormat,
+      });
+    } catch (error) {
+      res.send(error);
+      console.log(error, "ERROR");
+    }
+  }
 }
 
 module.exports = Controller;

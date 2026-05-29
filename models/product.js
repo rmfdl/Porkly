@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Product extends Model {
     /**
@@ -11,22 +9,31 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Product.belongsToMany(models.Order, { through: models.ProductOrder })
+      Product.hasMany(models.ProductOrder);
+      Product.belongsToMany(models.Order, { through: models.ProductOrder });
     }
   }
-  Product.init({
-    namaProduct: DataTypes.STRING,
-    kodeProduct: DataTypes.STRING,
-    jenis: DataTypes.STRING,
-    harga: DataTypes.INTEGER,
-    imageURL: DataTypes.STRING,
-    stock: DataTypes.INTEGER,
-    beratProduct: DataTypes.INTEGER,
-    deskripsi: DataTypes.STRING,
-    expired: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'Product',
-  });
+  Product.init(
+    {
+      namaProduct: DataTypes.STRING,
+      kodeProduct: DataTypes.STRING,
+      jenis: DataTypes.STRING,
+      harga: DataTypes.INTEGER,
+      imageURL: DataTypes.STRING,
+      stock: DataTypes.INTEGER,
+      beratProduct: DataTypes.INTEGER,
+      deskripsi: DataTypes.STRING,
+      expired: DataTypes.DATE,
+    },
+    {
+      hooks: {
+        beforeCreate: (product, options) => {
+          product.kodeProduct = `PRD-${Date.now()}`;
+        },
+      },
+      sequelize,
+      modelName: "Product",
+    },
+  );
   return Product;
 };
