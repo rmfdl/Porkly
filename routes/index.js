@@ -6,13 +6,14 @@ const logoutRoute = require("./logout");
 const profileRoute = require("./profile");
 const productsRoute = require("./products.js");
 const cartRoute = require("./cart.js");
+const adminRoute = require("./admin.js");
 const Controller = require("../controllers/controller.js");
 
 // router.get('/', Controller.home)
 router.get("/", Controller.home);
 
+router.use("/admin", adminRoute);
 router.use("/register", registerRoute);
-router.use("/products", productsRoute);
 router.use("/cart", cartRoute);
 router.use("/login", loginRoute);
 
@@ -41,6 +42,7 @@ router.use((req, res, next) => {
 });
 
 router.use("/logout", logoutRoute);
+router.use("/products", productsRoute);
 router.use("/profile", profileRoute);
 
 module.exports = router;
