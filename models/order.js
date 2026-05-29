@@ -21,6 +21,13 @@ module.exports = (sequelize, DataTypes) => {
       UserId: DataTypes.INTEGER,
     },
     {
+      hooks: {
+        beforeCreate: (order, options) => {
+          order.tanggalOrder = new Date();
+          order.totalHarga = 0;
+          order.status = "Diproses";
+        },
+      },
       sequelize,
       modelName: "Order",
     },
