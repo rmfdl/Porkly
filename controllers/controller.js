@@ -9,21 +9,22 @@ const { Op } = require("sequelize");
 const currencyFormat = require("../helpers/currencyFormat");
 const bcrypt = require("bcryptjs");
 
-
 //bagian home nanti tampilin 4 cotnoh product, lalu bikin link seem more products.
 
 class Controller {
   static async home(req, res) {
     try {
       // const products = await Product.findAll();
-      res.render("home", {isLogin: req.session.userId,
-      userRole: req.session.userRole});
+      res.render("home", {
+        isLogin: req.session.userId,
+        userRole: req.session.userRole,
+      });
     } catch (error) {
       res.send(error);
       console.log(error, "ERROR");
     }
   }
-   static async readProduct(req, res) {
+  static async readProduct(req, res) {
     try {
       const { search } = req.query;
       let options = {
@@ -31,7 +32,7 @@ class Controller {
 
         where: {},
       };
-       if (search) {
+      if (search) {
         options.where.namaProduct = {
           [Op.iLike]: `%${search}%`,
         };
@@ -39,9 +40,11 @@ class Controller {
 
       const products = await Product.findAll(options);
 
-       res.render("products", { products,isLogin: req.session.userId, currencyFormat });
-      
-       
+      res.render("products", {
+        products,
+        isLogin: req.session.userId,
+        currencyFormat,
+      });
     } catch (error) {
       res.send(error);
       console.log(error, "ERROR");
@@ -49,27 +52,25 @@ class Controller {
   }
   static async readProductById(req, res) {
     try {
-       const { id } = req.params;
-       const product = await Product.findOne({
+      const { id } = req.params;
+      const product = await Product.findOne({
         where: {
           id: id,
         },
       });
 
-      res.render("productDetails", { product, currencyFormat, isLogin: req.session.userId});
-
-     
-       
+      res.render("productDetails", {
+        product,
+        currencyFormat,
+        isLogin: req.session.userId,
+      });
     } catch (error) {
       res.send(error);
       console.log(error, "ERROR");
     }
   }
-    static async addToCart(req, res) {
+  static async addToCart(req, res) {
     try {
-      
-      
-      
       // res.render("login", {isLogin: req.session.userId, error });
     } catch (error) {
       res.send(error);
@@ -80,10 +81,7 @@ class Controller {
   static async addRegisterForm(req, res) {
     try {
       const { errors } = req.query;
-      res.render("register", {isLogin: req.session.userId, errors
-
-      });
-       
+      res.render("register", { isLogin: req.session.userId, errors });
     } catch (error) {
       res.send(error);
       console.log(error, "ERROR");
@@ -91,7 +89,8 @@ class Controller {
   }
   static async postRegisterForm(req, res) {
     try {
-       
+      console.log(req.body);
+
       const { namaLengkap, email, nomorHp, password, role } = req.body;
       await User.findOne({
         //buat ambil nama
@@ -103,29 +102,26 @@ class Controller {
         password,
         role,
       });
-      
+
       await Profile.create({
         namaLengkap,
-        UserId: user.id
+        UserId: user.id,
       });
       res.redirect("/login");
     } catch (error) {
       if (error.name === "SequelizeValidationError") {
         let errors = error.errors.map((element) => element.message);
-        res.redirect(
-          `/register?errors=${errors}`,
-        );
+        res.redirect(`/register?errors=${errors}`);
       } else {
         res.send(error);
       }
-      
     }
   }
 
   static async addLoginForm(req, res) {
     try {
-       const { error } = req.query
-      res.render("login", {isLogin: req.session.userId, error });
+      const { error } = req.query;
+      res.render("login", { isLogin: req.session.userId, error });
     } catch (error) {
       res.send(error);
       console.log(error, "ERROR");
@@ -138,36 +134,35 @@ class Controller {
       let user = await User.findOne({
         where: { email },
       });
-//session middleware
+      //session middleware
       if (user) {
         console.log(password, user.password);
-        const isValidPassword = bcrypt.compareSync
-        (password, user.password);
+        const isValidPassword = bcrypt.compareSync(password, user.password);
         // console.log(isValidPassword);
         if (isValidPassword) {
-            req.session.userId = user.id;
-            req.session.userRole = user.role;
-            // req.session= {id: user.id,role:user.role }
-            
-          return res.redirect("/");
-        } else
-        {
+          req.session.userId = user.id;
+          req.session.userRole = user.role;
+          // req.session= {id: user.id,role:user.role }
 
-          return res.redirect("/login?error=email tidak terdaftar");
+          return res.redirect("/");
+        } else {
+          // data salah 
+          return res.redirect("/login?error=Email atau password salah");
         }
+      } else {
+        // kalau tidak tedaftar
+        return res.redirect("/login?error=email tidak terdaftar");
       }
     } catch (error) {
       res.send(error);
       console.log(error, "ERROR");
     }
   }
-   static logout(req, res) {
+  static logout(req, res) {
     req.session.destroy((err) => {
-    if (err)res.send(err)
-    else 
-    res.redirect("/")
-    })
-    
+      if (err) res.send(err);
+      else res.redirect("/");
+    });
   }
 
   //   static async cart(req, res) {
@@ -178,10 +173,8 @@ class Controller {
   //     console.log(error, "ERROR");
   //   }
   // }
-
-
 }
 
 module.exports = Controller;
 
-// cek validasi role, nama, validasi email, 
+// cek validasi role, nama, validasi email,
