@@ -1,6 +1,6 @@
 <%- include('_header') %>
 <div
-  style="display:flex; gap:50px;margin:50px 120px;align-items:flex-start;">
+  style="display:flex; gap:50px; margin:80px 200px; margin-bottom:400px; align-items:flex-start;">
 
   <!-- gambar -->
   <div style="width:50%;">
@@ -16,20 +16,19 @@
       <%= product.namaProduct %>
     </h1>
 
-    <p style="color:#dc3545;">
+    <p style="font-weight: bold; color: #dc3545;">
       <%= currencyFormat(product.harga) %>
     </p>
 
-    
-    <p style="margin-top:20px;">
-     Berat product: <%= product.beratProduct %> gram
-    </p>
-
-    <p style="margin-top:20px;">
+    <p style="margin-top:10px; max-width:400px; text-align:justify;">
       <%= product.deskripsi %>
     </p>
 
-    <p>
+     <p style="margin-top:10px;">
+     Berat: <%= product.beratProduct %> gram
+    </p>
+
+    <p style="margin-bottom: 30px">
       Stock :
       <%= product.stock %>
     </p>

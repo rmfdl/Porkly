@@ -140,6 +140,7 @@ class Controller {
         const isValidPassword = bcrypt.compareSync(password, user.password);
         // console.log(isValidPassword);
         if (isValidPassword) {
+<<<<<<< HEAD
           req.session.userId = user.id;
           req.session.userRole = user.role;
           // req.session= {id: user.id,role:user.role }
@@ -152,6 +153,22 @@ class Controller {
       } else {
         // kalau tidak tedaftar
         return res.redirect("/login?error=email tidak terdaftar");
+=======
+            req.session.userId = user.id;
+            req.session.userRole = user.role;
+            // req.session= {id: user.id,role:user.role }
+            
+          return res.redirect("/");
+        }
+        // else {
+        //   // email tidak terdaftar
+        //   return res.redirect("/login?error=Email tidak terdaftar");
+        // }
+      } 
+      else {
+        // kalau email atau password salah.
+        return res.redirect("/login?error=Email atau password salah");
+>>>>>>> 4aeb1ea (edit login, register, product)
       }
     } catch (error) {
       res.send(error);

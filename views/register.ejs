@@ -2,7 +2,8 @@
 
 
 <%-include("_header") %>
-<div class="mt-5">
+<div style="display: flex; align-items: center; justify-content: center; margin-top: 50px; margin-bottom: 100px;">
+<div style="width: 380px; border: 1px solid #e0e0e0; border-radius: 10px; padding: 30px; margin-top: 10px;">
     <div class="text-center ">
     <h2 >Welcome to Porkly</h2>
     <p>Please create your account here</p>
@@ -10,15 +11,14 @@
 
      
     <!-- form -->
-    <div class="d-flex justify-content-center mt-5">
-        <form action="/register" method="post"
-        class="w-25 text-left">
+    <form action="/register" method="post"
+        class="text-left" style="width: 100%">
 
 <!-- validasi -->
         <% if(errors) {%>
         <% errors=errors.split(",") %>
         <% errors.forEach(error =>{ %>
-            <p style="color: red;"><%=error %></p>
+            <p style="color:#dc3545; background-color: #fff0f0; padding: 5px; margin-bottom: 16px;"><%=error %></p>
         <%  }) %>
         <%  } %>
 
@@ -41,7 +41,7 @@
                 <label class="form-label">Password</label>
                 <input type="text" class="form-control" name="password">
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label class="form-label">Role</label>
                 <select class="form-select form-select" aria-label="Small select example" name="role">
                 <option selected value="">select</option>
@@ -51,10 +51,10 @@
              </div>
 
             <div  class="mb-3 d-flex justify-content-center gap-3">
-                <button type="submit" class="btn btn-primary">Register</button>
+                <button type="submit" class="btn btn-danger" style="width:100%">Register</button>
             </div>
         </form>
-    </div>
+</div>
 
 </div>
 
